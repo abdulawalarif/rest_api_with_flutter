@@ -15,7 +15,7 @@ class _HomeScreenState extends State<HomeScreen> {
         FocusScope.of(context).unfocus();
       },
       child: const Scaffold(
-        body: Center(child: Text("Welcome to this course")),
+        body: Center(child: Text("Welcome")),
       ),
     );
   }
