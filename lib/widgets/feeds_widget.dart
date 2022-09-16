@@ -2,15 +2,19 @@ import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:store_api_flutter_course/screens/product_details.dart';
+import 'package:provider/provider.dart';
+import 'package:store_api_flutter_course/models/products_model.dart';
 
 import '../consts/global_colors.dart';
+import '../screens/product_details.dart';
 
 class FeedsWidget extends StatelessWidget {
   const FeedsWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final productsModelProvider = Provider.of<ProductsModel>(context);
+
     Size size = MediaQuery.of(context).size;
     return Padding(
       padding: const EdgeInsets.all(2.0),
@@ -23,8 +27,10 @@ class FeedsWidget extends StatelessWidget {
             Navigator.push(
               context,
               PageTransition(
-                child: const ProductDetails(),
                 type: PageTransitionType.fade,
+                child: ProductDetails(
+                  id: productsModelProvider.id.toString(),
+                ),
               ),
             );
           },
@@ -32,11 +38,7 @@ class FeedsWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.only(
-                  left: 5,
-                  right: 5,
-                  top: 8,
-                ),
+                padding: const EdgeInsets.only(left: 5, right: 5, top: 8),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -48,12 +50,10 @@ class FeedsWidget extends StatelessWidget {
                               color: Color.fromRGBO(33, 150, 243, 1)),
                           children: <TextSpan>[
                             TextSpan(
-                              text: "168.00",
-                              style: TextStyle(
-                                color: lightTextColor,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
+                                text: "${productsModelProvider.price}",
+                                style: TextStyle(
+                                    color: lightTextColor,
+                                    fontWeight: FontWeight.w600)),
                           ],
                         ),
                       ),
@@ -73,18 +73,18 @@ class FeedsWidget extends StatelessWidget {
                     color: Colors.red,
                     size: 28,
                   ),
-                  imageUrl: "https://i.ibb.co/vwB46Yq/shoes.png",
+                  imageUrl: productsModelProvider.images![0],
                   boxFit: BoxFit.fill,
                 ),
               ),
               const SizedBox(height: 10),
-              const Padding(
-                padding: EdgeInsets.all(8.0),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  " Title",
+                  productsModelProvider.title.toString(),
                   overflow: TextOverflow.ellipsis,
                   maxLines: 2,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 17,
                     //  fontFamily: 'Roboto',
                     fontWeight: FontWeight.w700,
