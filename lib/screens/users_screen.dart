@@ -10,7 +10,12 @@ class UsersScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Users"),
       ),
-      body: UsersWidget(),
+      body: ListView.builder(
+        itemCount: 10,
+        itemBuilder: (ctx, index) {
+          return const UsersWidget();
+        },
+      ),
     );
   }
 }

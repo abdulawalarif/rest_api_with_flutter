@@ -19,7 +19,7 @@ class UsersWidget extends StatelessWidget {
           color: Colors.red,
           size: 28,
         ),
-        imageUrl: "https://i.ibb.co/vwB46Yq/shoes.png",
+        imageUrl: "https://placeimg.com/640/480/any",
         boxFit: BoxFit.fill,
       ),
       title: const Text("User Name"),
